@@ -15,7 +15,7 @@ knurls=50;
 
 /* [Top] */
 show_top="yes"; // [yes,no]
-threaded_top_height=4.1;
+threaded_top_height=6.1;
 unthreaded_top_height=4.2;
 
 /* [Bottom] */
