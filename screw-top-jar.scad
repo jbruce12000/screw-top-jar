@@ -146,6 +146,10 @@ chamfer_for_cylinder(d=d,h=chamfer,c=chamfer);
 }
 
 //----------------------------------------------------------------------------
+echo("Jar Details...");
+echo("Jar Outside Diameter: ", jar_outside_d, "mm");
+echo("Jar Inside Diameter: ", jar_inside_d, "mm");
+
 if (show_top=="yes") {
 translate([jar_outside_d+5,0,0])
 translate([0,0,unthreaded_top_height+threaded_top_height])
