@@ -2413,7 +2413,7 @@ function thread_specs(designator, table=THREAD_TABLE) =
     let (specs = table[search([designator], table, num_returns_per_match=1,
                               index_col_num=0)[0]][1])
         // verify that we found something and return it:
-    specs;
+        specs;
 
 module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
 {
@@ -2524,6 +2524,7 @@ tap(thread, turns=h/thread_info[0]);
 //----------------------------------------------------------------------------
 module top(d=25,uth=4,tth=4,sides=6,chamfer=1,thread="M20",thread_info=thread_int_info) {
 
+union() {
 translate([0,0,tth-safety])
 difference() {
 // unthreaded part of top
@@ -2541,22 +2542,25 @@ translate([0,0,tth])
 mirror([0,0,1])
 cut_female_threads(h=tth,thread=thread,thread_info=thread_info)
 cylinder(d=d,h=tth,$fn=sides);
-
+}
 }
 
 //---------------------------------------------------------------------------
 module knurl_cylinder(h=10,d=25,depth=1) {
 
 if (knurled=="no") { children(); }
-
+if (knurled=="yes") {
 difference() {
 children();
+union() {
 degs=360/knurls;
 for(i=[0:degs:360]) {
 rotate([0,0,i])
 translate([d/2,0,0])
 rotate([0,0,45])
 cube([knurl_depth,knurl_depth,h*2],center=true);
+}
+}
 }
 }
 }
@@ -2602,5 +2606,4 @@ if (show_bottom=="yes") {
 knurl_cylinder(d=jar_outside_d,h=unthreaded_bottom_height+threaded_bottom_height)
 bottom(d=jar_outside_d,ubh=unthreaded_bottom_height,tbh=threaded_bottom_height,sides=sides,thread=thread,thread_info=thread_int_info);
 }
-
 
