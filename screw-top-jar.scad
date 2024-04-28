@@ -12,6 +12,8 @@ knurled="yes"; // [yes,no]
 knurl_depth=1.0;
 //number of knurls
 knurls=50;
+// object scale in x,y, and z
+object_scale = 1; //[.5:.01:5]
 
 /* [Top] */
 show_top="yes"; // [yes,no]
@@ -151,10 +153,11 @@ chamfer_for_cylinder(d=d,h=chamfer,c=chamfer);
 
 //----------------------------------------------------------------------------
 echo("Jar Details...");
-echo("Jar Outside Diameter: ", jar_outside_d, "mm");
-echo("Jar Inside Diameter: ", jar_inside_d, "mm");
+echo("Jar Outside Diameter: ", jar_outside_d * object_scale, "mm");
+echo("Jar Inside Diameter: ", jar_inside_d * object_scale, "mm");
 
 if (show_top=="yes") {
+scale(object_scale)
 translate([jar_outside_d+5,0,0])
 translate([0,0,unthreaded_top_height+threaded_top_height])
 mirror([0,0,1])
@@ -163,6 +166,7 @@ top(d=jar_outside_d,uth=unthreaded_top_height,tth=threaded_top_height,sides=side
 }
 
 if (show_bottom=="yes") {
+scale(object_scale)
 knurl_cylinder(d=jar_outside_d,h=unthreaded_bottom_height+threaded_bottom_height)
 bottom(d=jar_outside_d,ubh=unthreaded_bottom_height,tbh=threaded_bottom_height,sides=sides,thread=thread,thread_info=thread_int_info);
 }
